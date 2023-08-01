@@ -1,0 +1,80 @@
+{
+    "_id": "2571c3b5-3cd9-4a47-bebf-c1483cb54c7b",
+    "colName": "Contentful",
+    "created": "2023-08-01T08:08:58.459Z",
+    "sortNum": 10000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "d6633020-8614-46c5-927c-987890740e6b",
+            "colId": "2571c3b5-3cd9-4a47-bebf-c1483cb54c7b",
+            "containerId": "",
+            "name": "Get Entry",
+            "url": "https://cdn.contentful.com/spaces/app2ux3l8qni/environments/master/entries/1KtiYhzJFBccVPxFgmAXEu",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-08-01T08:09:07.463Z",
+            "modified": "2023-08-01T08:13:08.052Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{apiKey}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2e0f2023-18d9-440d-b277-1e78571af672",
+            "colId": "2571c3b5-3cd9-4a47-bebf-c1483cb54c7b",
+            "containerId": "",
+            "name": "List all Entries",
+            "url": "https://cdn.contentful.com/spaces/app2ux3l8qni/environments/master/entries",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-08-01T08:23:30.231Z",
+            "modified": "2023-08-01T08:23:50.577Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{apiKey}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2b356fcc-22ea-458a-afc9-8f7627ccb4d2",
+            "colId": "2571c3b5-3cd9-4a47-bebf-c1483cb54c7b",
+            "containerId": "",
+            "name": "Query Entries",
+            "url": "https://cdn.contentful.com/spaces/app2ux3l8qni/environments/master/entries?fields.slug=foretee_terms-tee-time&content_type=policy",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-08-01T10:53:28.575Z",
+            "modified": "2023-08-01T10:57:18.273Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "isDisabled": true
+                }
+            ],
+            "params": [
+                {
+                    "name": "fields.slug",
+                    "value": "foretee_terms-tee-time",
+                    "isPath": false
+                },
+                {
+                    "name": "content_type",
+                    "value": "policy",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{apiKey}}"
+            },
+            "tests": []
+        }
+    ]
+}
