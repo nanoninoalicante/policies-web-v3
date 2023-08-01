@@ -36,6 +36,9 @@ export default defineNuxtConfig({
         prerender: {
             routes: [],
         },
+        future: {
+            nativeSWR: true,
+        },
     },
     hooks: {
         async "nitro:config"(config: any) {
