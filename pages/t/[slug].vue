@@ -51,11 +51,11 @@ if (!data || !data.value) {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
 useHead({
-    title: `Policy - ${entry.value?.fields?.title}`,
+    title: `Policy - ${data?.value?.fields?.title}`,
     meta: [
         {
             name: "description",
-            content: `Policy - ${entry.value?.fields?.title}`,
+            content: `Policy - ${data?.value?.fields?.title}`,
         },
     ],
 });
