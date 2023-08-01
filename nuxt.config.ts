@@ -40,6 +40,9 @@ export default defineNuxtConfig({
             nativeSWR: true,
         },
     },
+    experimental: {
+        payloadExtraction: false,
+    },
     hooks: {
         async "nitro:config"(config: any) {
             const entries = await generateRoutes();
