@@ -31,7 +31,7 @@ const getEntry = async (id: string = "") => {
         throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
     }
     const entry = await response.json();
-    console.log("entry: ", entry);
+    console.log(`entry for ${slug}`, entry);
     if (!entry || entry.items.length === 0) {
         console.log("404");
         throw createError({ statusCode: 404, statusMessage: "Page Not Found" });

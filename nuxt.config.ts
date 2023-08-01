@@ -41,7 +41,11 @@ export default defineNuxtConfig({
         async "nitro:config"(config: any) {
             const entries = await generateRoutes();
             for (const entry of entries) {
-                if (!entry || !entry.slug) continue;
+                console.log("rerendering: " + entry?.slug);
+                if (!entry || !entry.slug) {
+                    console.log("no slug");
+                    continue;
+                }
                 config.prerender.routes.push("/t/" + entry.slug);
             }
         },
