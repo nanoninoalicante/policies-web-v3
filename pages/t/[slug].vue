@@ -39,15 +39,7 @@ const getEntry = async (id: string = "") => {
         return null;
     }
     entry.value = entryResponse.items[0];
-    useHead({
-        title: `Policy - ${entry.value?.fields?.title}`,
-        meta: [
-            {
-                name: "description",
-                content: `Policy - ${entry.value?.fields?.title}`,
-            },
-        ],
-    });
+
     return entryResponse.items[0];
 };
 
@@ -58,6 +50,15 @@ const { data, pending, error, refresh } = await useAsyncData("entry", () =>
 if (!data || !data.value) {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
+useHead({
+    title: `Policy - ${entry.value?.fields?.title}`,
+    meta: [
+        {
+            name: "description",
+            content: `Policy - ${entry.value?.fields?.title}`,
+        },
+    ],
+});
 
 const body = computed(() => {
     const options = {
