@@ -47,7 +47,6 @@ export default defineNuxtConfig({
                     continue;
                 }
                 config.prerender.routes.push("/t/" + entry.slug);
-                config.prerender.routes.push("/t/" + entry.slug + "/dark");
             }
         },
     },
