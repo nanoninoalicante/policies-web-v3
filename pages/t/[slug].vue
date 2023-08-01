@@ -14,6 +14,8 @@ const route = useRoute();
 const slug: any = route.params?.slug || "";
 const contentfulContentApiKey = import.meta.env.VITE_CONTENTFUL_CONTENT_API_KEY;
 
+const entry = ref<any>(null);
+
 const getEntry = async (id: string = "") => {
     let headersList = {
         Authorization: `Bearer ${contentfulContentApiKey}`,
@@ -28,20 +30,34 @@ const getEntry = async (id: string = "") => {
     );
     console.log("response: ", response.status);
     if (!response || !response.ok) {
-        throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+        return null;
     }
-    const entry = await response.json();
-    console.log(`entry for ${slug}`, entry);
-    if (!entry || entry.items.length === 0) {
+    const entryResponse = await response.json();
+    console.log(`entryResponse for ${slug}`, entryResponse);
+    if (!entryResponse || entryResponse.items.length === 0) {
         console.log("404");
-        throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+        return null;
     }
-    return entry.items[0];
+    entry.value = entryResponse.items[0];
+    useHead({
+        title: `Policy - ${entry.value?.fields?.title}`,
+        meta: [
+            {
+                name: "description",
+                content: `Policy - ${entry.value?.fields?.title}`,
+            },
+        ],
+    });
+    return entryResponse.items[0];
 };
 
 const { data, pending, error, refresh } = await useAsyncData("entry", () =>
     getEntry(slug),
 );
+
+if (!data || !data.value) {
+    throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+}
 
 const body = computed(() => {
     const options = {
