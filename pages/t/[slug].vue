@@ -1,7 +1,7 @@
 <template>
     <main class="px-2 lg:px-48 xl:px-96">
         <div
-            class="px-4 pt-12 pb-36 font-medium text-sm text-gray-700 dark:text-gray-50"
+            class="px-4 pt-12 pb-36 font-medium text-sm text-gray-700 dark:text-gray-300"
             v-html="body"
         ></div>
     </main>
