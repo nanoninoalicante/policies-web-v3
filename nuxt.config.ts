@@ -16,9 +16,16 @@ const generateRoutes = async () => {
             console.error("error:" + err);
             throw err;
         });
-
     return response.items.map((item: any) => {
-        if (!item || !item?.fields?.slug) return null;
+        if (
+            !item ||
+            !item?.fields?.slug ||
+            !item?.fields?.title ||
+            !item?.fields?.body
+        )
+            return null;
+
+        console.log("routes to be generated: ", item?.fields?.slug);
         return { slug: item?.fields?.slug, id: item?.sys?.id };
     });
 };
