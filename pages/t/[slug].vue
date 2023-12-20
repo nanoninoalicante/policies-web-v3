@@ -7,12 +7,14 @@
     </main>
 </template>
 <script setup lang="ts">
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { useRoute } from "vue-router";
 const route = useRoute();
 const slug: any = route.params?.slug || "";
 const contentfulContentApiKey = import.meta.env.VITE_CONTENTFUL_CONTENT_API_KEY;
+
+const darkMode = route.path.includes("/dark");
 
 const entry = ref<any>(null);
 
@@ -28,12 +30,18 @@ const getEntry = async (id: string = "") => {
             headers: headersList,
         },
     );
-    console.log("response: ", response.status);
+    console.log(`response for id ${id}`, response.status);
     if (!response || !response.ok) {
         return null;
     }
-    const entryResponse = await response.json();
-    console.log(`entryResponse for ${slug}`, entryResponse);
+
+    let entryResponse = null;
+    try {
+        entryResponse = await response.json();
+        console.log(`entryResponse for ${slug}`, entryResponse);
+    } catch (error) {
+        console.log("error getting entry response: ", error);
+    }
     if (!entryResponse || entryResponse.items.length === 0) {
         console.log("404");
         return null;
@@ -47,7 +55,7 @@ const { data, pending, error, refresh } = await useAsyncData("entry", () =>
     getEntry(slug),
 );
 
-if (!data || !data.value) {
+if (!data || !data.value || !data.value?.fields || !data.value?.fields?.body) {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
 }
 useHead({
@@ -82,6 +90,11 @@ const body = computed(() => {
                 `<h1 class="text-lg font-bold py-1 mb-4 mt-10">${next(
                     node.content,
                 )}</h1>`,
+            [INLINES.HYPERLINK]: (node: any, next: any) => {
+                return `<a class="underline text-blue-500 hover:no-underline hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-400" href="${
+                    node.data?.uri
+                }${darkMode ? "/dark" : ""}">${next(node.content)}</a>`;
+            },
         },
     };
     return documentToHtmlString(data?.value?.fields?.body, options);
