@@ -1,7 +1,7 @@
 <template>
     <main class="px-2 lg:px-48 xl:px-96">
         <div
-            class="px-4 pt-12 pb-36 font-medium text-sm text-gray-700 dark:text-gray-300"
+            class="px-4 pt-8 pb-36 font-medium text-sm text-gray-700 dark:text-gray-300"
             v-html="body"
         ></div>
     </main>
@@ -74,22 +74,22 @@ const body = computed(() => {
             [BLOCKS.PARAGRAPH]: (node: any, next: any) =>
                 `<p class="py-2 mb-4">${next(node.content)}</p>`,
             [BLOCKS.HEADING_1]: (node: any, next: any) =>
-                `<h1 class="text-xl font-bold py-1 mb-4 mt-10">${next(
+                `<h1 class="text-2xl font-bold py-1 mb-4 mt-10">${next(
                     node.content,
                 )}</h1>`,
 
             [BLOCKS.HEADING_2]: (node: any, next: any) =>
-                `<h1 class="text-lg font-bold py-1 mb-4 mt-10">${next(
+                `<h2 class="text-xl font-bold py-1 mb-4 mt-10">${next(
                     node.content,
-                )}</h1>`,
+                )}</h2>`,
             [BLOCKS.HEADING_3]: (node: any, next: any) =>
-                `<h1 class="text-lg font-bold py-1 mb-4 mt-10">${next(
+                `<h3 class="text-lg font-bold py-1 mb-4 mt-10">${next(
                     node.content,
-                )}</h1>`,
+                )}</h3>`,
             [BLOCKS.HEADING_4]: (node: any, next: any) =>
-                `<h1 class="text-lg font-bold py-1 mb-4 mt-10">${next(
+                `<h4 class="text-md font-bold py-1 mb-4 mt-10">${next(
                     node.content,
-                )}</h1>`,
+                )}</h4>`,
             [INLINES.HYPERLINK]: (node: any, next: any) => {
                 return `<a class="underline text-blue-500 hover:no-underline hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-400" href="${
                     node.data?.uri
